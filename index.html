@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>DON JUSTO VETERINARIA</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+scroll-behavior:smooth;
+}
+
+body{
+background:#eef6ef;
+}
+
+header{
+
+background:linear-gradient(90deg,#1b5e20,#1976d2);
+
+color:white;
+
+padding:40px 20px;
+
+text-align:center;
+
+position:relative;
+
+overflow:hidden;
+
+}
+
+header h1{
+
+font-size:45px;
+
+font-weight:bold;
+
+}
+
+header p{
+
+margin-top:10px;
+
+font-size:22px;
+
+}
+
+header img{
+
+width:130px;
+
+margin:15px;
+
+}
+
+.huella{
+
+position:absolute;
+
+font-size:30px;
+
+opacity:.15;
+
+animation:mover 15s linear infinite;
+
+}
+
+.huella:nth-child(1){
+
+top:15%;
+
+left:10%;
+
+}
+
+.huella:nth-child(2){
+
+top:60%;
+
+left:80%;
+
+}
+
+.huella:nth-child(3){
+
+top:30%;
+
+left:50%;
+
+}
+
+@keyframes mover{
+
+0%{
+
+transform:translateY(0px) rotate(0deg);
+
+}
+
+100%{
+
+transform:translateY(-300px) rotate(360deg);
+
+}
+
+}
+
+#busqueda{
+
+width:95%;
+
+max-width:600px;
+
+display:block;
+
+margin:30px auto;
+
+padding:15px;
+
+border-radius:10px;
+
+border:1px solid #ccc;
+
+font-size:18px;
+
+}
+
+.productos{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+
+gap:20px;
+
+padding:20px;
+
+}
+
+.producto{
+
+background:white;
+
+border-radius:15px;
+
+padding:20px;
+
+box-shadow:0 5px 15px rgba(0,0,0,.15);
+
+transition:.3s;
+
+}
+
+.producto:hover{
+
+transform:translateY(-5px);
+
+}
+
+.producto img{
+
+width:100%;
+
+height:220px;
+
+object-fit:cover;
+
+border-radius:12px;
+
+}
+
+.producto h3{
+
+margin-top:15px;
+
+color:#1b5e20;
+
+}
+
+.producto p{
+
+margin:8px 0;
+
+color:#666;
+
+}
+
+.producto button{
+
+background:#1b5e20;
+
+color:white;
+
+border:none;
+
+padding:12px;
+
+width:100%;
+
+font-size:17px;
+
+border-radius:10px;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+.producto button:hover{
+
+background:#1976d2;
+
+}
+
+#carrito{
+
+position:fixed;
+
+top:15px;
+
+right:15px;
+
+background:white;
+
+padding:15px;
+
+border-radius:15px;
+
+box-shadow:0 5px 15px rgba(0,0,0,.2);
+
+z-index:999;
+
+width:220px;
+
+}
+
+#carrito h2{
+
+font-size:22px;
+
+color:#1b5e20;
+
+margin-bottom:10px;
+
+}
+
+#lista{
+
+font-size:14px;
+
+max-height:180px;
+
+overflow:auto;
+
+text-align:left;
+
+}
+
+#pagar{
+
+margin-top:10px;
+
+width:100%;
+
+background:#1976d2;
+
+color:white;
+
+padding:12px;
+
+border:none;
+
+border-radius:10px;
+
+font-size:16px;
+
+cursor:pointer;
+
+display:none;
+
+}
+
+#pago{
+
+display:none;
+
+position:fixed;
+
+top:0;
+
+left:0;
+
+width:100%;
+
+height:100%;
+
+background:rgba(0,0,0,.8);
+
+overflow:auto;
+
+padding:20px;
+
+z-index:9999;
+
+}
+
+.cajaPago{
+
+background:white;
+
+max-width:700px;
+
+margin:30px auto;
+
+border-radius:20px;
+
+padding:30px;
+
+}
+
+.cajaPago h2{
+
+text-align:center;
+
+color:#1b5e20;
+
+margin-bottom:20px;
+
+}
+
+.datos{
+
+background:#f2f2f2;
+
+padding:20px;
+
+border-radius:15px;
+
+line-height:35px;
+
+font-size:18px;
+
+}
+
+.aviso{
+
+margin-top:20px;
+
+background:#fff8e1;
+
+padding:15px;
+
+border-left:6px solid orange;
+
+border-radius:10px;
+
+}
+
+.whatsapp{
+
+display:block;
+
+margin-top:20px;
+
+background:#25D366;
+
+color:white;
+
+text-align:center;
+
+padding:15px;
+
+border-radius:12px;
+
+text-decoration:none;
+
+font-size:20px;
+
+}
+
+footer{
+
+margin-top:50px;
+
+background:#1b5e20;
+
+color:white;
+
+padding:20px;
+
+text-align:center;
+
+}
+
+@media(max-width:700px){
+
+header h1{
+
+font-size:30px;
+
+}
+
+header p{
+
+font-size:18px;
+
+}
+
+#carrito{
+
+position:relative;
+
+width:95%;
+
+margin:20px auto;
+
+right:0;
+
+top:0;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<div class="huella">🐾</div>
+<div class="huella">🐾</div>
+<div class="huella">🐾</div>
+
+<h1>🐶 DON JUSTO VETERINARIA 🐱</h1>
+
+<p>Alimento Premium para Perros y Gatos</p>
+
+<img src="https://images.unsplash.com/photo-1517849845537-4d257902454a?w=400" alt="Perro">
+
+<img src="https://images.unsplash.com/photo-1519052537078-e6302a4968d4?w=400" alt="Gato">
+
+</header>
+
+<input type="text" id="busqueda" placeholder="Buscar producto...">
+
+<div id="carrito">
+
+<h2>🛒 Carrito</h2>
+
+<div id="lista"></div>
+
+<button id="pagar" onclick="abrirPago()">
+Continuar al pago
+</button>
+
+</div>
+
+<div class="productos" id="productos"><div class="productos" id="productos"><!-- NUPEC -->
+
+<div class="producto">
+<img src="https://via.placeholder.com/400x300?text=Nupec+Cachorro">
+<h3>Nupec Cachorro</h3>
+<p>Alimento para crecimiento saludable.</p>
+<button onclick="agregar('Nupec Cachorro')">Seleccionar</button>
+</div>
+
+
+<div class="producto">
+<img src="https://via.placeholder.com/400x300?text=Nupec+Adulto">
+<h3>Nupec Adulto</h3>
+<p>Nutrición completa para perros adultos.</p>
+<button onclick="agregar('Nupec Adulto')">Seleccionar</button>
+</div>
+
+
+<div class="producto">
+<img src="https://via.placeholder.com/400x300?text=Nupec+Senior">
+<h3>Nupec Senior</h3>
+<p>Especial para perros mayores.</p>
+<button onclick="agregar('Nupec Senior')">Seleccionar</button>
+</div>
+
+
+<div class="producto">
+<img src="https://via.placeholder.com/400x300?text=Nupec+Razas+Pequeñas">
+<h3>Nupec Razas Pequeñas</h3>
+<p>Alimento especializado.</p>
+<button onclick="agregar('Nupec Razas Pequeñas')">Seleccionar</button>
+</div>
+
+
+<div class="producto">
+<img src="https://via.placeholder.com/400x300?text=Nupec+Weight+Control">
+<h3>Nupec Weight Control</h3>
+<p>Ayuda al control de peso.</p>
+<button onclick="agregar('Nupec Weight Control')">Seleccionar</button>
+</div>
+
+
+
+<!-- ROYAL CANIN -->
+
+<div class="producto">
+<img src="https://via.placeholder.com/400x300?text=Royal+Canin+Mini+Adult">
+<h3>Royal Canin Mini Adult</h3>
+<p>Para perros pequeños adultos.</p>
+<button onclick="agregar('Royal Canin Mini Adult')">Seleccionar</button>
+</div>
+
+
+<div class="producto">
+<img src="https://via.placeholder.com/400x300?text=Royal+Canin+Medium+Adult">
+<h3>Royal Canin Medium Adult</h3>
+<p>Nutrición balanceada.</p>
+<button onclick="agregar('Royal Canin Medium Adult')">Seleccionar</button>
+</div>
+
+
+<div class="producto">
+<img src="https://via.placeholder.com/400x300?text=Royal+Canin+Maxi+Adult">
+<h3>Royal Canin Maxi Adult</h3>
+<p>Para perros grandes.</p>
+<button onclick="agregar('Royal Canin Maxi Adult')">Seleccionar</button>
+</div>
+
+
+<div class="producto">
+<img src="https://via.placeholder.com/400x300?text=Royal+Canin+Puppy">
+<h3>Royal Canin Puppy</h3>
+<p>Alimento para cachorros.</p>
+<button onclick="agregar('Royal Canin Puppy')">Seleccionar</button>
+</div>
+
+
+<div class="producto">
+<img src="https://via.placeholder.com/400x300?text=Royal+Canin+Indoor+Cat">
+<h3>Royal Canin Indoor Cat</h3>
+<p>Alimento para gatos de interior.</p>
+<button onclick="agregar('Royal Canin Indoor Cat')">Seleccionar</button>
+</div>
+
+
+
+<!-- PRO PLAN -->
+
+<div class="producto">
+<img src="https://via.placeholder.com/400x300?text=Pro+Plan+Puppy">
+<h3>Pro Plan Puppy</h3>
+<p>Nutrición avanzada para cachorros.</p>
+<button onclick="agregar('Pro Plan Puppy')">Seleccionar</button>
+</div>
+
+
+<div class="producto">
+<img src="https://via.placeholder.com/400x300?text=Pro+Plan+Adult">
+<h3>Pro Plan Adult Complete</h3>
+<p>Protección y energía diaria.</p>
+<button onclick="agregar('Pro Plan Adult Complete')">Seleccionar</button>
+</div>
+
+
+<div class="producto">
+<img src="https://via.placeholder.com/400x300?text=Pro+Plan+Sensitive">
+<h3>Pro Plan Sensitive Skin</h3>
+<p>Para piel sensible.</p>
+<button onclick="agregar('Pro Plan Sensitive Skin')">Seleccionar</button>
+</div>
+
+
+<div class="producto">
+<img src="https://via.placeholder.com/400x300?text=Pro+Plan+Kitten">
+<h3>Pro Plan Kitten</h3>
+<p>Alimento para gatitos.</p>
+<button onclick="agregar('Pro Plan Kitten')">Seleccionar</button>
+</div>
+
+
+<div class="producto">
+<img src="https://via.placeholder.com/400x300?text=Pro+Plan+Cat">
+<h3>Pro Plan Adult Cat</h3>
+<p>Nutrición para gatos adultos.</p>
+<button onclick="agregar('Pro Plan Adult Cat')">Seleccionar</button>
+</div><!-- DOG CHOW -->
+
+<div class="producto">
+<img src="https://via.placeholder.com/400x300?text=Dog+Chow+Cachorro">
+<h3>Dog Chow Cachorro</h3>
+<p>Alimento para cachorros.</p>
+<button onclick="agregar('Dog Chow Cachorro')">Seleccionar</button>
+</div>
+
+
+<div class="producto">
+<img src="https://via.placeholder.com/400x300?text=Dog+Chow+Adulto">
+<h3>Dog Chow Adulto</h3>
+<p>Nutrición diaria para perros adultos.</p>
+<button onclick="agregar('Dog Chow Adulto')">Seleccionar</button>
+</div>
+
+
+<div class="producto">
+<img src="https://via.placeholder.com/400x300?text=Dog+Chow+Razas+Pequeñas">
+<h3>Dog Chow Razas Pequeñas</h3>
+<p>Especial para perros pequeños.</p>
+<button onclick="agregar('Dog Chow Razas Pequeñas')">Seleccionar</button>
+</div>
+
+
+
+<!-- CAT CHOW -->
+
+<div class="producto">
+<img src="https://via.placeholder.com/400x300?text=Cat+Chow+Gatitos">
+<h3>Cat Chow Gatitos</h3>
+<p>Alimento para gatos jóvenes.</p>
+<button onclick="agregar('Cat Chow Gatitos')">Seleccionar</button>
+</div>
+
+
+<div class="producto">
+<img src="https://via.placeholder.com/400x300?text=Cat+Chow+Adultos">
+<h3>Cat Chow Adultos</h3>
+<p>Nutrición completa para gatos.</p>
+<button onclick="agregar('Cat Chow Adultos')">Seleccionar</button>
+</div>
+
+
+
+<!-- MININO -->
+
+<div class="producto">
+<img src="https://via.placeholder.com/400x300?text=Minino+Plus">
+<h3>Minino Plus</h3>
+<p>Alimento balanceado para gatos.</p>
+<button onclick="agregar('Minino Plus')">Seleccionar</button>
+</div>
+
+
+<div class="producto">
+<img src="https://via.placeholder.com/400x300?text=Minino+Normal">
+<h3>Minino Normal</h3>
+<p>Alimento diario para gatos.</p>
+<button onclick="agregar('Minino Normal')">Seleccionar</button>
+</div>
+
+
+
+<!-- GANADOR -->
+
+<div class="producto">
+<img src="https://via.placeholder.com/400x300?text=Ganador+Premium">
+<h3>Ganador Premium</h3>
+<p>Alimento premium para perros.</p>
+<button onclick="agregar('Ganador Premium')">Seleccionar</button>
+</div>
+
+
+<div class="producto">
+<img src="https://via.placeholder.com/400x300?text=Ganador+Estandar">
+<h3>Ganador Estándar</h3>
+<p>Nutrición completa y económica.</p>
+<button onclick="agregar('Ganador Estándar')">Seleccionar</button>
+</div>
+
+
+
+<!-- HULK -->
+
+<div class="producto">
+<img src="https://via.placeholder.com/400x300?text=Hulk+Cachorro">
+<h3>Hulk Cachorro</h3>
+<p>Para crecimiento y energía.</p>
+<button onclick="agregar('Hulk Cachorro')">Seleccionar</button>
+</div>
+
+
+<div class="producto">
+<img src="https://via.placeholder.com/400x300?text=Hulk+Adulto">
+<h3>Hulk Adulto</h3>
+<p>Alimento para perros adultos.</p>
+<button onclick="agregar('Hulk Adulto')">Seleccionar</button>
+</div>
+
+
+</div>
+</div> 
+<!-- VENTANA DE PAGO -->
+
+<div id="pago">
+
+<div class="cajaPago">
+
+<h2>💳 Finalizar compra</h2>
+
+<h3>Productos seleccionados:</h3>
+
+<div id="resumen"></div>
+
+
+<div class="datos">
+
+<p><strong>Banco:</strong> BBVA Bancomer</p>
+
+<p><strong>Titular:</strong> Teresa Guadalupe García Gil</p>
+
+<p><strong>Cuenta:</strong> 0483556654</p>
+
+<p><strong>CLABE:</strong> 012180004835566542</p>
+
+</div>
+
+
+<div class="aviso">
+
+<p>
+📌 Realiza tu transferencia y envía tu comprobante para confirmar tu pedido.
+</p>
+
+<p>
+🐾 Tu compra será preparada después de verificar el pago.
+</p>
+
+</div>
+
+
+<a class="whatsapp" 
+href="https://wa.me/" 
+target="_blank">
+
+📲 Enviar comprobante por WhatsApp
+
+</a>
+
+
+<br>
+
+<button onclick="cerrarPago()" 
+style="
+width:100%;
+padding:15px;
+background:#1b5e20;
+color:white;
+border:none;
+border-radius:10px;
+font-size:18px;
+cursor:pointer;
+">
+
+Cerrar
+
+</button>
+
+
+</div>
+
+</div>
+
+
+
+<footer>
+
+<h3>🐾 DON JUSTO VETERINARIA 🐾</h3>
+
+<p>Alimento de calidad para tus mejores amigos</p>
+
+</footer>
+
+
+
+<script>
+
+let carrito=[];
+
+
+
+function agregar(producto){
+
+carrito.push(producto);
+
+mostrarCarrito();
+
+}
+
+
+
+function mostrarCarrito(){
+
+let lista=document.getElementById("lista");
+
+lista.innerHTML="";
+
+
+carrito.forEach((producto,index)=>{
+
+lista.innerHTML+=`
+
+<p>
+${index+1}. ${producto}
+</p>
+
+`;
+
+});
+
+
+if(carrito.length>0){
+
+document.getElementById("pagar").style.display="block";
+
+}
+
+}
+
+
+
+function abrirPago(){
+
+document.getElementById("pago").style.display="block";
+
+
+let resumen=document.getElementById("resumen");
+
+resumen.innerHTML="";
+
+
+carrito.forEach(producto=>{
+
+resumen.innerHTML+=`
+
+<p>🐾 ${producto}</p>
+
+`;
+
+});
+
+
+}
+
+
+
+function cerrarPago(){
+
+document.getElementById("pago").style.display="none";
+
+}
+
+
+
+
+// BUSCADOR
+
+document.getElementById("busqueda")
+.addEventListener("keyup",function(){
+
+
+let texto=this.value.toLowerCase();
+
+
+let productos=document
+.querySelectorAll(".producto");
+
+
+productos.forEach(producto=>{
+
+
+let contenido=producto.innerText.toLowerCase();
+
+
+if(contenido.includes(texto)){
+
+producto.style.display="block";
+
+}
+
+else{
+
+producto.style.display="none";
+
+}
+
+
+});
+
+
+});
+
+
+</script>
+
+
+</body>
+
+</html>
