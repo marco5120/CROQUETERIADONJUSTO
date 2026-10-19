@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DON JUSTO VETERINARIA - Catálogo Seleccionado</title>
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+        body {
+            background: linear-gradient(135deg, #f8f6f0 0%, #eeebe3 100%);
+            background-attachment: fixed;
+            color: #2c3e50;
+        }
+        header {
+            background: linear-gradient(135deg, #0d3c1a, #0a2540);
+            color: #f5f6fa;
+            padding: 50px 20px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+        header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 46px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        header p {
+            font-size: 18px;
+            font-weight: 300;
+            color: #dcdde1;
+            letter-spacing: 1px;
+        }
+        .filtro-contenedor {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+        #busqueda {
+            width: 100%;
+            padding: 15px 25px;
+            border-radius: 30px;
+            border: 1px solid #d1ccc0;
+            font-size: 16px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.03);
+            outline: none;
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+        #busqueda:focus {
+            border-color: #0d3c1a;
+        }
+        .marcas-filtro {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #e6e4dc;
+            padding-bottom: 15px;
+        }
+        .btn-marca {
+            background: #fff;
+            border: 1px solid #d1ccc0;
+            padding: 6px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            color: #57606f;
+        }
+        .btn-marca.activo, .btn-marca:hover {
+            background: #0a2540;
+            color: white;
+            border-color: #0a2540;
+        }
+        .categoria-filtro {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .btn-tipo {
+            background: #fff;
+            border: 1px solid #d1ccc0;
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        .btn-tipo.activo, .btn-tipo:hover {
+            background: #0d3c1a;
+            color: white;
+            border-color: #0d3c1a;
+        }
+        .contenedor-principal {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            gap: 25px;
+            padding: 20px;
+        }
+        .productos {
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 25px;
+        }
+        .producto {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.04);
+            border: 1px solid rgba(255,255,255,0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .producto:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+        }
+        .producto-imagen-wrapper {
+            width: 100%;
+            height: 220px;
+            background: #fff;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+            box-shadow: inset 0 0 8px rgba(0,0,0,0.01);
+        }
+        .producto img {
+            max-width: 85%;
+            max-height: 85%;
+            object-fit: contain;
+        }
+        .badge-marca {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #0a2540;
+            color: white;
+            padding: 3px 9px;
+            border-radius: 10px;
+            font-size: 10px;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+        .producto h3 {
+            margin-top: 15px;
+            color: #0d3c1a;
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            font-weight: 700;
+        }
+        .producto p {
+            margin: 8px 0 15px 0;
+            color: #7f8c8d;
+            font-size: 13px;
+            line-height: 1.4;
+            flex-grow: 1;
+        }
+        .producto button {
+            background: #0d3c1a;
+            color: white;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            font-size: 14px;
+            font-weight: 500;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .producto button:hover {
+            background: #145c28;
+        }
+        #carrito {
+            width: 310px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+            height: fit-content;
+            position: sticky;
+            top: 25px;
+        }
+        #carrito h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            color: #0d3c1a;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .contador-items {
+            background: #0d3c1a;
+            color: white;
+            font-size: 12px;
+            padding: 2px 8px;
+            border-radius: 10px;
+        }
+        #lista {
+            font-size: 13px;
+            max-height: 280px;
+            overflow-y: auto;
+            margin-bottom: 15px;
+        }
+        .item-carrito {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px dashed #e6e4dc;
+        }
+        .btn-eliminar {
+            background: none;
+            border: none;
+            color: #e74c3c;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 15px;
+        }
+        #pagar {
+            width: 100%;
+            background: #0a2540;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            font-size: 15px;
+            cursor: pointer;
+        }
+        #modal-pago {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 37, 64, 0.5);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-contenido {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+        }
+        .datos-banco {
+            background: #f8f6f0;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            font-size: 14px;
+            line-height: 1.5;
+            border: 1px solid #ebe7df;
+        }
+        .btn-whatsapp {
+            background: #25d366;
+            color: white;
+            padding: 12px;
+            border-radius: 10px;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+            font-weight: 600;
+            margin-top: 15px;
+        }
+        .btn-cerrar {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: #95a5a6;
+        }
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 50px;
+            background: #0a2540;
+            color: #8a99ad;
+            font-size: 13px;
+        }
+        @media (max-width: 850px) {
+            .contenedor-principal { flex-direction: column-reverse; }
+            #carrito { width: 100%; position: static; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>DON JUSTO VETERINARIA</h1>
+        <p>Alimento de Alta Gama para tus Mejores Amigos</p>
+    </header>
+
+    <div class="filtro-contenedor">
+        <input type="text" id="busqueda" placeholder="Escribe el nombre del alimento para buscar rápidamente..." oninput="filtrarProductos()">
+        
+        <!-- BOTONES CREADOS PARA SEPARAR LOS PRODUCTOS POR MARCA -->
+        <div class="marcas-filtro">
+            <button class="btn-marca activo" onclick="filtrarMarca('todas', this)">Todas las Marcas</button>
+            <button class="btn-marca" onclick="filtrarMarca('Nupec', this)">Nupec</button>Royal Canin
+Pro Plan
+Dog Chow
+Cat Chow
+Minino
+Ganador
+Hills
+Todos los Animales
+Perros 🐶
+Gatos 🐱
+
+Cotización 0
+No has seleccionado productos.
+Solicitar Cotización
+
+×
+Finalizar Pedido
+
+Banco: BBVA Bancomer
+
+Titular: Teresa Guadalupe García Gil
+
+Cuenta: 0483556654
+
+CLABE: 012180004835566542
+
+📌 Realiza tu transferencia y envía la lista a tu asesor de confianza vía WhatsApp para validar existencias.
+📲 Enviar Lista a WhatsApp
+
+🐾 DON JUSTO VETERINARIA 🐾
+// Catálogo corregido con imágenes reales de los costales de alimento
+const productosData = [
+{ id: 1, marca: "Nupec", nombre: "Nupec Cachorro", tipo: "perro", desc: "Alimento óptimo para el desarrollo inicial del cachorro.", img: "forrajeraenlinea.com" },
+{ id: 2, marca: "Nupec", nombre: "Nupec Adulto", tipo: "perro", desc: "Nutrición científica completa y balanceada.", img: "forrajeraenlinea.com" },
+{ id: 3, marca: "Nupec", nombre: "Nupec Senior", tipo: "perro", desc: "Formulado para conservar la vitalidad de perros maduros.", img: "forrajeraenlinea.com" },
+{ id: 4, marca: "Nupec", nombre: "Nupec Razas Pequeñas", tipo: "perro", desc: "Densidad nutricional adaptada a mandíbulas pequeñas.", img: "forrajeraenlinea.com" },
+{ id: 5, marca: "Nupec", nombre: "Nupec Weight Control", tipo: "perro", desc: "Reduce grasa manteniendo masa muscular intacta.", img: "forrajeraenlinea.com" },
+{ id: 6, marca: "Royal Canin", nombre: "Royal Canin Mini Adult", tipo: "perro", desc: "Satisface las altas demandas de energía.", img: "animall.com.mx" },
+{ id: 7, marca: "Royal Canin", nombre: "Royal Canin Medium Adult", tipo: "perro", desc: "Soporte inmunitario y digestivo avanzado.", img: "animall.com.mx" },
+{ id: 8, marca: "Royal Canin", nombre: "Royal Canin Maxi Adult", tipo: "perro", desc: "Refuerzo osteoarticular específico para tallas grandes.", img: "animall.com.mx" },
+{ id: 9, marca: "Royal Canin", nombre: "Royal Canin Puppy", tipo: "perro", desc: "Nutrición selecta para la primera etapa de vida.", img: "animall.com.mx" },
+{ id: 10, marca: "Royal Canin", nombre: "Royal Canin Indoor Cat", tipo: "gato", desc: "Reduce el olor de las evacuaciones en interiores.", img: "animall.com.mx" },
+{ id: 11, marca: "Pro Plan", nombre: "Pro Plan Puppy", tipo: "perro", desc: "Adicionado con calostro para defensas superiores.", img: "amazon.com.AC_SL1500.jpg" },
+{ id: 12, marca: "Pro Plan", nombre: "Pro Plan Adult Complete", tipo: "perro", desc: "Optimiza la salud global y energía diaria.", img: "amazon.com.AC_SL1500.jpg" },
+{ id: 13, marca: "Pro Plan", nombre: "Pro Plan Sensitive Skin", tipo: "perro", desc: "A base de salmón para aminorar irritaciones cutáneas.", img: "amazon.com.AC_SL1500.jpg" },
+{ id: 14, marca: "Pro Plan", nombre: "Pro Plan Kitten", tipo: "gato", desc: "Desarrollo tecnológico integral para gatitos.", img: "amazon.com.AC_SL1500.jpg" },
+{ id: 15, marca: "Pro Plan", nombre: "Pro Plan Adult Cat", tipo: "gato", desc: "Tecnología Optirental para protección renal.", img: "amazon.com.AC_SL1500.jpg" },
+{ id: 16, marca: "Dog Chow", nombre: "Dog Chow Cachorro", tipo: "perro", desc: "Vitaminas ideales para su desarrollo inicial.", img: "amazon.com.AC_SL1500.jpg" },
+{ id: 17, marca: "Dog Chow", nombre: "Dog Chow Adulto", tipo: "perro", desc: "Músculos firmes y equilibrio metabólico diario.", img: "amazon.com.AC_SL1500.jpg" },
+{ id: 18, marca: "Dog Chow", nombre: "Dog Chow Razas Pequeñas", tipo: "perro", desc: "Cuidado oral óptimo mediante croqueta a la medida.", img: "amazon.com.AC_SL1500.jpg" },
+{ id: 19, marca: "Cat Chow", nombre: "Cat Chow Gatitos", tipo: "gato", desc: "Protección inmunológica para felinos jóvenes.", img: "amazon.com.AC_SL1500.jpg" },
+{ id: 20, marca: "Cat Chow", nombre: "Cat Chow Adultos", tipo: "gato", desc: "Nutrición completa enfocado en el tracto urinario.", img: "amazon.com.AC_SL1500.jpg" },
+{ id: 21, marca: "Minino", nombre: "Minino Plus", tipo: "gato", desc: "Ingredientes de alta palatabilidad seleccionada.", img: "amazon.com.AC_SL1500.jpg" },
+{ id: 22, marca: "Minino", nombre: "Minino Normal", tipo: "gato", desc: "Alimento balanceado diario para vitalidad felina.", img: "amazon.com.AC_SL1500.jpg" },
+{ id: 23, marca: "Ganador", nombre: "Ganador Premium", tipo: "perro", desc: "Asegura un pelaje brilloso, sedoso y fuerte.", img: "amazon.com.AC_SL1500.jpg" },
+{ id: 24, marca: "Ganador", nombre: "Ganador Estándar", tipo: "perro", desc: "Rendimiento y balance alimenticio confiable.", img: "amazon.com.AC_SL1500.jpg" },
+{ id: 25, marca: "Hills", nombre: "Hills Cachorro", tipo: "perro", desc: "Nutrición clínica premium para el óptimo desarrollo celular.", img: "unsplash.com" },
+{ id: 26, marca: "Hills", nombre: "Hills Adulto", tipo: "perro", desc: "Fórmula de soporte y balance terapéutico de alta gama.", img: "unsplash.com" }
+];
+let carritoSelection = [];
+let marcaActiva = "todas";
+let tipoActivo = "todos";
+function renderizarCatalogo(lista) {
+const contenedor = document.getElementById("lista-productos");
+contenedor.innerHTML = "";
+if(lista.length === 0) {
+contenedor.innerHTML = <p style="grid-column: 1/-1; text-align:center; padding:40px; color:#7f8c8d;">No hay productos que coincidan con los filtros establecidos.</p>;
+return;
+}
+lista.forEach(prod => {
+const card = document.createElement("div");
+card.className = "producto";
+card.innerHTML = <div> <div class="producto-imagen-wrapper"> <span class="badge-marca">${prod.marca}</span> <img src="${prod.img}" alt="${prod.nombre}"> </div> <h3>${prod.nombre}</h3> <p>${prod.desc}</p> </div> <button onclick="agregarAlCarrito('${prod.nombre}')">Seleccionar para Cotizar</button>;
+contenedor.appendChild(card);
+});
+}
+function agregarAlCarrito(nombre) {
+const existe = carritoSelection.find(item => item.nombre === nombre);
+if(existe) { existe.cantidad++; }
+else { carritoSelection.push({ nombre: nombre, cantidad: 1 }); }
+actualizarInterfazCarrito();
+}
+function eliminarDelCarrito(nombre) {
+carritoSelection = carritoSelection.filter(item => item.nombre !== nombre);
+actualizarInterfazCarrito();
+}
+function actualizarInterfazCarrito() {
+const contenedorLista = document.getElementById("lista");
+const btnPagar = document.getElementById("pagar");
+const contador = document.getElementById("contador");
+let totalItems = carritoSelection.reduce((acc, item) => acc + item.cantidad, 0);
+contador.innerText = totalItems;
+if(carritoSelection.length === 0) {
+contenedorLista.innerHTML = <p style="color:#aaa; text-align:center; padding: 20px 0;">No has seleccionado productos.</p>;
+btnPagar.style.display = "none";
+return;
+}
+btnPagar.style.display = "block";
+contenedorLista.innerHTML = "";
+carritoSelection.forEach(item => {
+const row = document.createElement("div");
+row.className = "item-carrito";
+row.innerHTML = <span><strong>${item.cantidad}x</strong> ${item.nombre}</span> <button class="btn-eliminar" onclick="eliminarDelCarrito('${item.nombre}')">&times;</button>;
+contenedorLista.appendChild(row);
+});
+}
+function filtrarProductos() {
+const texto = document.getElementById("busqueda").value.toLowerCase();
+let filtrados = productosData.filter(p => p.nombre.toLowerCase().includes(texto));
+if(marcaActiva !== "todas") {
+filtrados = filtrados.filter(p => p.marca === marcaActiva);
+}
+if(tipoActivo !== "todos") {
+filtrados = filtrados.filter(p => p.tipo === tipoActivo);
+}
+renderizarCatalogo(filtrados);
+}
+// LÓGICA DE FILTRADO POR MARCAS ASOCIADA A LOS NUEVOS BOTONES
+function filtrarMarca(marca, elemento) {
+marcaActiva = marca;
+document.querySelectorAll(".btn-marca").forEach(b => b.classList.remove("activo"));
+elemento.classList.add("activo");
+filtrarProductos();
+}
+function filtrarTipo(tipo, elemento) {
+tipoActivo = tipo;
+document.querySelectorAll(".btn-tipo").forEach(b => b.classList.remove("activo"));
+elemento.classList.add("activo");
+filtrarProductos();
+}
+function abrirModal() {
+document.getElementById("modal-pago").style.display = "flex";
+let numeroTelefono = "5512760092";
+let mensaje = "Hola Don Justo Veterinaria, solicito cotización para el siguiente pedido:\n\n";
+carritoSelection.forEach(item => { mensaje += • ${item.cantidad} pz. - ${item.nombre}\n; });
+let urlWa = https://whatsapp.com{numeroTelefono}&text=${encodeURIComponent(mensaje)};
+document.getElementById("enviar-wa").href = urlWa;
+}
+function cerrarModal() { document.getElementById("modal-pago").style.display = "none"; }
+renderizarCatalogo(productosData);
